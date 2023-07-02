@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: main_header('Update User')">
+</head>
+<body>
+      <div class="container">
+          <form  th:action="@{/user/update}" method="post" th:object="${userUpdate}"
+          enctype="multipart/form-data">
+              <input type="hidden" th:field="*{userId}" th:value="${userUpdate.userId}">
+              <div class="mb-3">
+                  <label for="email" class="form-label">Email address</label>
+                  <input type="email" class="form-control" id="email"  th:field="*{email}" th:value="${userUpdate.email}">
+                  <div th:if="${duplicateEmail}" id="emailHelp" class="form-text text-danger">*This email is already in use!</div>
+              </div>
+              <div class="mb-3">
+                  <label for="password" class="form-label">Password</label>
+                  <input type="password" class="form-control" id="password" th:field="*{password}" th:value="${userUpdate.password}">
+                  <div th:if="${passwordError != null}"  class="form-text text-danger">[[${passwordError}]]</div>
+              </div>
+              <div class="mb-3">
+                  <label for="firstName" class="form-label">First name : </label>
+                  <input type="text" class="form-control" id="firstName"th:field="*{firstName}" th:value="${userUpdate.firstName}">
+                  <div th:if="${firstNameError != null}"  class="form-text text-danger">[[${firstNameError}]]</div>
+
+              </div>
+              <div class="mb-3">
+                  <label for="lastName" class="form-label">Last name : </label>
+                  <input type="text" class="form-control" id="lastName" th:field="*{lastName}" th:value="${userUpdate.lastName}">
+                  <div th:if="${lastNameError != null}"  class="form-text text-danger">[[${lastNameError}]]</div>
+              </div>
+              <div class="mb-3">
+                  <label class="form-label">Roles : </label>
+                  <th:block th:each="role : ${listRole}" class="me-4">
+                      <input  type="checkbox" class="form-check-input me-2"
+                             th:value = "${role.roleId}"
+                             th:field="*{roles}">
+                      <label  class="form-label" th:text="${role.name}"></label>
+                  </th:block>
+              </div>
+              <div class="mb-3 form-check">
+                  <input type="checkbox" class="form-check-input" id="enabled" th:field="*{enabled}" th:checked="${userUpdate.enabled}">
+                  <label class="form-check-label" for="enabled">Is Enable?</label>
+              </div>
+              <div class="mb-3 form-check">
+                  <label class="form-check-label" for="photos">Photo :</label>
+                  <input type="file" id="photos"
+                         name="imageUser"
+                         accept="/image/png, image/jpeg, image/jpg" >
+                  <img  th:src="@{${userUpdate.photoImagePath}}" alt="avatar" class="img-fluid" style="width : 100px">
+              </div>
+              <input type="submit" value="Submit" class="btn btn-primary">
+              <button type="reset" id="btnCancel" class="btn btn-danger">Cancel</button>
+          </form>
+      </div>
+</body>
+</html>

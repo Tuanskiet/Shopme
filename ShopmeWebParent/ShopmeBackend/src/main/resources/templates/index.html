@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: main_header('Admin Page')">
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Admin Page</title>-->
+<!--    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">-->
+<!--    <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>-->
+<!--    <script type="text/javascript" th:src="@{/webjars/jquery/dist/jquery.js}"></script>-->
+</head>
+<body>
+<nav th:replace="fragments :: nav"></nav>
+
+<!--start List user-->
+<a th:href="@{/user/add}" class="btn btn-info">Create new user</a>
+<a th:href="@{/users/export/csv}" class="btn btn-success me-3">Export to csv</a>
+<a th:href="@{/users/export/excel}" class="btn btn-warning me-3">Export to Excel</a>
+<a th:href="@{/users/export/pdf}" class="btn btn-secondary me-3">Export to Pdf</a>
+
+<div th:if="${listUser.size() == 0}" class="alert alert-danger" role="alert">Empty list!</div>
+<div th:if="${success != null}" class="alert alert-success" role="alert">[[${success}]]</div>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Photo</th>
+        <th scope="col">Email</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Enable</th>
+        <th scope="col">Role</th>
+        <th scope="col">Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="item : ${listUser}">
+        <td>
+            <img th:if="${item.photos}" th:src="@{${item.photoImagePath}}" alt="avatar" class="img-fluid" style="width : 60px">
+        </td>
+        <td>[[${item.email}]]</td>
+        <td>[[${item.firstName}]]</td>
+        <td>[[${item.lastName}]]</td>
+        <td>[[${item.enabled}]]</td>
+        <td>[[${item.roles}]]</td>
+        <td>
+            <a th:href="@{'/user/edit?id=' + ${item.userId}}">Edit</a>
+            <a th:href="@{'/user/delete?id=' + ${item.userId}}">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<!--end List user-->
+<nav th:replace="fragments :: footer"></nav>
+</body>
+</html>

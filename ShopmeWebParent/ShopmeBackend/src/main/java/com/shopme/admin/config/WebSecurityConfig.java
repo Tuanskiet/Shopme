@@ -36,6 +36,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests().anyRequest().permitAll()
-                .and().formLogin().loginPage("login_page");
+                .and().formLogin().loginPage("/login")
+                .and().logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login?logout").deleteCookies("JSESSIONID", "remember-me")
+                .permitAll();
     }
 }

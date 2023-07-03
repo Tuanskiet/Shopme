@@ -3,48 +3,27 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:fragment="main_header(title)">
     <meta charset="UTF-8">
-    <title>[[${title}]</title>
+    <title th:text="${title}"></title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/fontawesome/all.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style_admin.css}">
+
     <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
     <script type="text/javascript" th:src="@{/webjars/jquery/dist/jquery.js}"></script>
 </head>
 <body>
-<!--start nav -->
-<nav th:fragment="nav" class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/ShopmeAdmin}">Users</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/ShopmeAdmin}">Categories</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/ShopmeAdmin}">Brands</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/ShopmeAdmin}">Products</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/ShopmeAdmin}">Customers</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/ShopmeAdmin}">Shipping</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/ShopmeAdmin}">Sale reports</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
+
+<!--item dashboard-->
+<li th:fragment="dashboard_item(title)" class="list-group-action  ps-4 py-2 border-0">
+    <a href="#" class="icon_action w-100 text-decoration-none text-dark">
+        <i class="bi bi-android2 fs-4"></i>
+        <span  th:text="${title}"></span>
+    </a>
+</li>
 <!--end nav -->
 <div th:fragment="footer">
+
 
 </div>
 </body>

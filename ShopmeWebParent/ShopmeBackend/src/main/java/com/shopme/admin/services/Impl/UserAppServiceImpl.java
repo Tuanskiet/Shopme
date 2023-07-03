@@ -58,9 +58,9 @@ public class UserAppServiceImpl implements UserAppService{
     }
 
     @Override
-    public void updateUser(Integer id, UserApp newUser) {
-        UserApp oldUser = this.getUserById(id);
-        BeanUtils.copyProperties(oldUser, newUser);
+    public void updateUser(UserApp newUser) {
+        UserApp oldUser = this.getUserById(newUser.getUserId());
+        BeanUtils.copyProperties(newUser, oldUser);
         this.encodePassword(oldUser);
         userRepository.save(oldUser);
     }

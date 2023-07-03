@@ -1,53 +1,138 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments :: main_header('Admin Page')">
-<!--    <meta charset="UTF-8">-->
-<!--    <title>Admin Page</title>-->
-<!--    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">-->
-<!--    <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>-->
-<!--    <script type="text/javascript" th:src="@{/webjars/jquery/dist/jquery.js}"></script>-->
+    <link rel="stylesheet" type="text/css" th:src="@{/css/style_admin.css}">
 </head>
 <body>
-<nav th:replace="fragments :: nav"></nav>
+<!--dashboard-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-2 p-0 border-end border-1 border-gray">
+            <div class="name_brand  h-70 d-flex justify-content-center align-items-center border-bottom border-1 border-gray">
+                <a class="navbar-brand fw-bold fs-4" th:href="@{/}">
+                    TK<span class="text-danger ">SHOP</span>
+                </a>
+            </div>
+            <div class="dashboard">
+                <ul class="d-flex flex-column list-group ">
+                    <li th:replace="fragments :: dashboard_item('Users')"></li>
+                    <li th:replace="fragments :: dashboard_item('Categories')"></li>
+                    <li th:replace="fragments :: dashboard_item('Brands')"></li>
+                    <li th:replace="fragments :: dashboard_item('Products')"></li>
+                    <li th:replace="fragments :: dashboard_item('Customers')"></li>
+                    <li th:replace="fragments :: dashboard_item('Shipping')"></li>
+                    <li th:replace="fragments :: dashboard_item('Sale reports')"></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-10 p-0">
+            <div class="row m-0 h-70 justify-content-between border-bottom border-1 border-gray">
+                <div class="col-4 d-flex align-items-center">
+                    <a href="" class="text-dark">
+                        <i class="bi bi-list fs-2 me-3"></i>
+                    </a>
+                    <a href="" class="text-dark">
+                        <i class="bi bi-search fs-4"></i>
+                    </a>
+                </div>
+                <div class="col-4 d-flex align-items-center justify-content-end">
+                    <div id="chat_msg" class="position-relative d-flex justify-content-center align-items-center me-3">
+                        <a href="" class="text-dark">
+                            <i class="bi bi-chat-dots fs-4"></i>
+                        </a>
+                        <div class="">
+                            <span class="text-white position-absolute top-0 start-75 translate-middle bg-danger sz-25 d-flex justify-content-center align-items-center rounded-circle">22</span>
+                        </div>
+                    </div>
+                    <div id="notification" class="position-relative d-flex justify-content-center align-items-center me-3">
+                        <a href="" class="text-dark">
+                            <i class="bi bi-bell fs-4"></i>
+                        </a>
+                        <div class="">
+                            <span class="text-white position-absolute top-0 start-75 translate-middle bg-danger sz-25  d-flex  justify-content-center align-items-center rounded-circle">7</span>
+                        </div>
+                    </div>
+                    <div class="img_user me-2">
+                        <img th:src="@{/images/user1.jpg}" class="img-fluid rounded-circle" alt="avatar" width="40px">
+                    </div>
+                    <span class="">Luc Tuan Kiet</span>
+                </div>
+            </div>
 
-<!--start List user-->
-<a th:href="@{/user/add}" class="btn btn-info">Create new user</a>
-<a th:href="@{/users/export/csv}" class="btn btn-success me-3">Export to csv</a>
-<a th:href="@{/users/export/excel}" class="btn btn-warning me-3">Export to Excel</a>
-<a th:href="@{/users/export/pdf}" class="btn btn-secondary me-3">Export to Pdf</a>
+            <!-- breadcrumb -->
+            <div class="breadcrumb-shop bg-dark bg-opacity-25 py-2">
+                <div class="container ">
+                    <nav aria-label="breadcrumb" style="--bs-breadcrumb-divider: '/';">
+                        <ol class="breadcrumb mb-0">
+                            <li class="breadcrumb-item"><a class="text-dark text-decoration-none" href="#">Trang chủ</a></li>
+                            <li class="breadcrumb-item active"><a class="text-dark text-decoration-none" href="#">Thanh toán</a></li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
 
-<div th:if="${listUser.size() == 0}" class="alert alert-danger" role="alert">Empty list!</div>
-<div th:if="${success != null}" class="alert alert-success" role="alert">[[${success}]]</div>
-<table class="table">
-    <thead>
-    <tr>
-        <th scope="col">Photo</th>
-        <th scope="col">Email</th>
-        <th scope="col">First Name</th>
-        <th scope="col">Last Name</th>
-        <th scope="col">Enable</th>
-        <th scope="col">Role</th>
-        <th scope="col">Action</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="item : ${listUser}">
-        <td>
-            <img th:if="${item.photos}" th:src="@{${item.photoImagePath}}" alt="avatar" class="img-fluid" style="width : 60px">
-        </td>
-        <td>[[${item.email}]]</td>
-        <td>[[${item.firstName}]]</td>
-        <td>[[${item.lastName}]]</td>
-        <td>[[${item.enabled}]]</td>
-        <td>[[${item.roles}]]</td>
-        <td>
-            <a th:href="@{'/user/edit?id=' + ${item.userId}}">Edit</a>
-            <a th:href="@{'/user/delete?id=' + ${item.userId}}">Delete</a>
-        </td>
-    </tr>
-    </tbody>
-</table>
-<!--end List user-->
+            <!--view-->
+                <!--start List user-->
+                <div class="list_user px-4">
+                    <div th:if="${listUser.size() == 0}" class="alert alert-danger mt-3 " role="alert">Empty list!</div>
+                    <div th:if="${success != null}" class="alert alert-success  mt-3" role="alert">[[${success}]]</div>
+                    <!--start List user -->
+                    <div class="d-flex justify-content-between  mt-3  ">
+                        <a th:href="@{/user/add}" class="btn btn-create">Create new user</a>
+                        <div class="group_export bg-dark bg-opacity-10 border border-1 border-dark">
+                            <a th:href="@{/users/export/csv}" class="btn btn-export">Export to csv</a>
+                            <a th:href="@{/users/export/excel}" class="btn btn-export">Export to Excel</a>
+                            <a th:href="@{/users/export/pdf}" class="btn ">Export to Pdf</a>
+                        </div>
+                    </div>
+
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Photo</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">First Name</th>
+                            <th scope="col">Last Name</th>
+                            <th scope="col">Enable</th>
+                            <th scope="col">Role</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="item : ${listUser}">
+                            <td>
+                                <img th:if="${item.photos}" th:src="@{${item.photoImagePath}}" alt="avatar" class="img-fluid" style="width : 60px">
+                            </td>
+                            <td>[[${item.email}]]</td>
+                            <td>[[${item.firstName}]]</td>
+                            <td>[[${item.lastName}]]</td>
+                            <td>[[${item.enabled}]]</td>
+                            <td>[[${item.roles}]]</td>
+                            <td>
+                                <a th:href="@{'/user/edit?id=' + ${item.userId}}">Edit</a>
+                                <a th:href="@{'/user/delete?id=' + ${item.userId}}">Delete</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!--end List user-->
+        </div>
+    </div>
+</div>
+
 <nav th:replace="fragments :: footer"></nav>
+
+<script>
+    $(function () {
+      var list = $('.list-group-action');
+        $('.list-group-action').click(function(){
+          list.each(function(){
+            $(this).removeClass('active');
+          });
+          $(this).addClass('active');
+        });
+     });
+</script>
 </body>
 </html>

@@ -12,7 +12,7 @@ public interface UserAppService extends UserDetailsService {
     List<UserApp> getAll();
     UserApp getUserById(Integer id);
     UserApp getUserByEmail(String email);
-    void updateUser(Integer id, UserApp newUser);
+    void updateUser( UserApp newUser);
     UserApp deleteUser(Integer id);
 
 }

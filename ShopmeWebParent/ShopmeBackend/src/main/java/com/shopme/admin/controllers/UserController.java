@@ -9,16 +9,14 @@ import com.shopme.admin.utils.exportpdf.UserPdfExporter;
 import com.shopme.common.entity.RoleApp;
 import com.shopme.common.entity.UserApp;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -90,17 +88,17 @@ public class UserController {
         model.addAttribute("userUpdate", userApp);
         return "user/edit_user";
     }
-    @PostMapping("/user/update")
-    public String updateUser(@RequestParam(name="id") Integer id,  Model model){
-        UserApp userUpdate = (UserApp) model.getAttribute("userUpdate");
-        userAppService.updateUser(id,userUpdate);
-        model.addAttribute("success", "Update user successfully!");
+    @PostMapping(value = "/user/update", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public String updateUser(@ModelAttribute(name = "userUpdate") UserApp userUpdate, RedirectAttributes attributes){
+        userAppService.updateUser(userUpdate);
+        attributes.addFlashAttribute("success", "Update user successfully!");
         return "redirect:/users";
     }
     @GetMapping("/user/delete")
-    public void deleteUser(@RequestParam(name="id") Integer id,  Model model){
+    public String deleteUser(@RequestParam(name="id") Integer id,  RedirectAttributes attributes){
         userAppService.deleteUser(id);
-        model.addAttribute("success", "Delete user successfully!");
+        attributes.addFlashAttribute("success", "Delete user successfully!");
+        return "redirect:/users";
     }
 
     // export

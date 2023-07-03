@@ -49,7 +49,7 @@ public class UserApp {
 
     @Transient
     public String getPhotoImagePath(){
-        if(this.userId == null || this.photos == null) return "/images/default-user.jpg";
+        if(this.userId == null || this.photos == null || this.photos == "") return "/images/default-user.jpg";
         return "/user-photos/" + userId + "/" + this.photos;
     }
 

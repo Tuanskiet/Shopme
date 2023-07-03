@@ -1,0 +1,38 @@
+.pointer{
+  cursor: pointer;
+}
+.line{
+  height: 1px;
+}
+.w-30{
+  width: 30px !important;
+}
+.sz-25{
+  width: 25px !important;
+  height: 25px !important;
+}
+.h-70{
+    height: 70px;
+}
+.list-group-action:hover, .list-group-action:focus {
+    z-index: 1;
+    color: #495057;
+    text-decoration: none;
+    background-color: #f8f9fa;
+}
+.list-group-action.active{
+      color: white;
+      background-color: #fe4c50;
+      /* border-color: $color; */
+}
+#searchForm > input{
+  outline: none;
+  background-color: #fff;
+}
+.btn-export{
+  border-radius: 0%;
+  border-right: solid 1px #495057 !important;
+}
+.btn-create{
+    background-color : #1dd1a1;
+}

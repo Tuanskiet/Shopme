@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+                xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      th:fragment="view(content)">
+<head th:replace="fragments :: main_header">
+</head>
+<body>
+<!--dashboard-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-2 p-0 border-end border-1 border-gray">
+            <div class="name_brand  h-70 d-flex justify-content-center align-items-center border-bottom border-1 border-gray">
+                <a class="navbar-brand fw-bold fs-4" th:href="@{/}">
+                    TK<span class="text-danger ">SHOP</span>
+                </a>
+            </div>
+            <div class="dashboard">
+                <ul class="d-flex flex-column list-group ">
+                    <li th:replace="fragments :: dashboard_item('Users', 'far fa-user fs-4')"></li>
+                    <li th:replace="fragments :: dashboard_item('Categories', 'fad fa-hat-wizard fs-4')"></li>
+                    <li th:replace="fragments :: dashboard_item('Brands', 'fab fa-yelp fs-4')"></li>
+                    <li th:replace="fragments :: dashboard_item('Products', 'fab fa-product-hunt fs-4')"></li>
+                    <li th:replace="fragments :: dashboard_item('Customers', 'fas fa-user-tie fs-4')"></li>
+                    <li th:replace="fragments :: dashboard_item('Shipping', 'fas fa-dolly fs-4')"></li>
+                    <li th:replace="fragments :: dashboard_item('Sale reports', 'fas fa-tags fs-4')"></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-10 p-0">
+            <div class="row m-0 h-70 justify-content-between border-bottom border-1 border-gray">
+                <div class="col-4 d-flex align-items-center">
+                    <a href="" class="text-dark">
+                        <i class="bi bi-list fs-2 me-3"></i>
+                    </a>
+                    <a href="" class="text-dark">
+                        <i class="bi bi-search fs-4"></i>
+                    </a>
+                </div>
+                <div class="col-4 d-flex align-items-center justify-content-end">
+                    <div id="chat_msg" class="position-relative d-flex justify-content-center align-items-center me-3">
+                        <a href="" class="text-dark">
+                            <i class="bi bi-chat-dots fs-4"></i>
+                        </a>
+                        <div class="">
+                            <span class="text-white position-absolute top-0 start-75 translate-middle bg-danger sz-25 d-flex justify-content-center align-items-center rounded-circle">22</span>
+                        </div>
+                    </div>
+                    <div id="notification" class="position-relative d-flex justify-content-center align-items-center me-3">
+                        <a href="" class="text-dark">
+                            <i class="bi bi-bell fs-4"></i>
+                        </a>
+                        <div class="">
+                            <span class="text-white position-absolute top-0 start-75 translate-middle bg-danger sz-25  d-flex  justify-content-center align-items-center rounded-circle">7</span>
+                        </div>
+                    </div>
+                    <div class="img_user me-2">
+                        <img th:src="@{/images/user1.jpg}" class="img-fluid rounded-circle" alt="avatar" width="40px">
+                    </div>
+                    <span class="">Luc Tuan Kiet</span>
+                </div>
+            </div>
+            <!--view-->
+            <th:block th:replace="${content}"></th:block>
+        </div>
+    </div>
+</div>
+
+<nav th:replace="fragments :: footer"></nav>
+</body>
+</html>

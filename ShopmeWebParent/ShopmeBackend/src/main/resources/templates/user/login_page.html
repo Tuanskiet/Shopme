@@ -1,26 +1,68 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments :: main_header('Login page')">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:repalce="~{_layout :: content(~{::#content})}"  >
+<!--<head th:replace="fragments :: main_header('Login page')">-->
 </head>
 <body>
-      <div class="container">
-          <form th:action="@{/login}" method="post" >
-              <div class="mb-3">
-                  <label for="exampleInputEmail1" class="form-label">Email address</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1"  name="username">
-                  <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+      <div id="content">
+          <div class="container">
+              <h5 class="modal-title text-center w-100 fs-3" id="exampleModalToggleLabel">Đăng nhập</h5>
+              <form th:action="@{/login}" method="post" >
+                  <div class="login-box">
+                      <div class="user-box-group d-flex align-items-center mb-4">
+                          <i class="bi bi-envelope-at me-2 fs-4 flex-shrink-0"></i>
+                          <div class="user-box position-relative flex-grow-1">
+                              <input id="email-login" type="email" class="fs-5 p-0 w-100" aria-describedby="emailHelp" name="username">
+                              <label for="email-login"  class="form-label position-absolute start-0  mb-0">
+                                  Email đăng nhập</label>
+                          </div>
+                      </div>
+
+                      <div class="user-box-group d-flex align-items-center mb-4">
+                          <i class="bi bi-person me-2 fs-4 flex-shrink-0"></i>
+                          <div class="user-box position-relative flex-grow-1">
+                              <input id="password-login" type="password" class="fs-5 p-0 w-100" name="password">
+                              <label for="password-login"  class="form-label position-absolute start-0  mb-0">
+                                  Mật khẩu</label>
+                          </div>
+                      </div>
+                      <div class="mb-3 form-check">
+                          <input type="checkbox" class="form-check-input" id="exampleCheck1" name="remember-me">
+                          <label class="form-check-label" for="exampleCheck1">Ghi nhớ tài khoản</label>
+                      </div>
+                      <div class="d-flex justify-content-center">
+                          <button type="submit" class="btn btn-outline-danger bg-opacity-25 fs-6 rounded-0 text-uppercase fw-bold w-100">Đăng nhập</button>
+                      </div>
+                  </div>
+                  <a th:href="@{/sign-in}" >Sign in</a>
+              </form>
+
+              <div class="row mt-3 align-items-center">
+                  <div class="col-5 line bg-black"></div>
+                  <div class="col-2 text-center">Hoặc</div>
+                  <div class="col-5 line bg-black"></div>
               </div>
-              <div class="mb-3">
-                  <label for="exampleInputPassword1" class="form-label"  name="pasword">Password</label>
-                  <input type="password" class="form-control" id="exampleInputPassword1">
+
+              <div class="row justify-content-between mt-3">
+                  <div class="col-6 ">
+                      <div class="border border-1 border-dark  py-2 text-center d-flex align-items-center justify-content-center">
+                          <img th:src="@{/images/social_icons/facebook-icon.png}" class="social-icon  me-2" alt="">
+                          <a class=" text-decoration-none fs-5" href="">
+                              <span>Facebook</span>
+                          </a>
+                      </div>
+                  </div>
+
+                  <div class="col-6 ">
+                      <div class="border border-1 border-dark py-2 text-center d-flex align-items-center justify-content-center">
+                          <img th:src="@{/images/social_icons/google-icon.png}" class="social-icon  me-2" alt="">
+                          <a class=" text-decoration-none fs-5" href="">
+                              <span>Google</span>
+                          </a>
+                      </div>
+                  </div>
               </div>
-              <div class="mb-3 form-check">
-                  <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                  <label class="form-check-label" for="exampleCheck1" name="remember-me">Remember me</label>
-              </div>
-              <button type="submit" class="btn btn-primary">Login</button>
-              <a th:href="@{/sign-in}" >Sign in</a>
-          </form>
+          </div>
       </div>
 </body>
 </html>

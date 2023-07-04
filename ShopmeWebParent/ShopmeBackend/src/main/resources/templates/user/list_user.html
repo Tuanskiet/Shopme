@@ -1,0 +1,45 @@
+<!--start List user-->
+<div class="list_user px-4">
+  <div th:if="${listUser.size() == 0}" class="alert alert-danger mt-3 " role="alert">Empty list!</div>
+  <div th:if="${success != null}" class="alert alert-success  mt-3" role="alert">[[${success}]]</div>
+  <!--start List user -->
+  <div class="d-flex justify-content-between  mt-3  ">
+    <a th:href="@{/user/add}" class="btn btn-create">Create new user</a>
+    <div class="group_export bg-dark bg-opacity-10 border border-1 border-dark">
+      <a th:href="@{/users/export/csv}" class="btn btn-export">Export to csv</a>
+      <a th:href="@{/users/export/excel}" class="btn btn-export">Export to Excel</a>
+      <a th:href="@{/users/export/pdf}" class="btn ">Export to Pdf</a>
+    </div>
+  </div>
+
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">Photo</th>
+      <th scope="col">Email</th>
+      <th scope="col">First Name</th>
+      <th scope="col">Last Name</th>
+      <th scope="col">Enable</th>
+      <th scope="col">Role</th>
+      <th scope="col">Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="item : ${listUser}">
+      <td>
+        <img  th:src="@{${item.photoImagePath}}" alt="avatar" class="img-fluid rounded-circle" style="width : 60px">
+      </td>
+      <td>[[${item.email}]]</td>
+      <td>[[${item.firstName}]]</td>
+      <td>[[${item.lastName}]]</td>
+      <td>[[${item.enabled}]]</td>
+      <td>[[${item.roles}]]</td>
+      <td>
+        <a th:href="@{'/user/edit?id=' + ${item.userId}}">Edit</a>
+        <a th:href="@{'/user/delete?id=' + ${item.userId}}">Delete</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<!--end List user-->

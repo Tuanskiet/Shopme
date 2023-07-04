@@ -1,23 +1,41 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:fragment="main_header(title)">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+    >
+<head th:fragment="main_header">
     <meta charset="UTF-8">
-    <title th:text="${title}"></title>
+    <title>Tk Shop</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/fontawesome/all.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/style_admin.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 
     <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
     <script type="text/javascript" th:src="@{/webjars/jquery/dist/jquery.js}"></script>
+    <script type="text/javascript" th:src="@{/js/custom_animation.js}"></script>
+    <script type="text/javascript" th:src="@{/js/common.js}"></script>
 </head>
 <body>
+<!-- breadcrumb-->
+<th:block th:fragment="breadcrumb(path)">
+    <div class="breadcrumb-shop bg-dark bg-opacity-25 py-2">
+        <div class="container ">
+            <nav aria-label="breadcrumb" style="--bs-breadcrumb-divider: '/';">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a class="text-dark text-decoration-none" href="#">Trang chủ</a></li>
+                    <li class="breadcrumb-item active"><a class="text-dark text-decoration-none" href="#" th:text="${path}"></a></li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</th:block>
 
 <!--item dashboard-->
-<li th:fragment="dashboard_item(title)" class="list-group-action  ps-4 py-2 border-0">
+<li th:fragment="dashboard_item(title, icon)" class="list-group-action  ps-4 py-2 border-0">
     <a href="#" class="icon_action w-100 text-decoration-none text-dark">
-        <i class="bi bi-android2 fs-4"></i>
+        <i th:class="${icon}"></i>
         <span  th:text="${title}"></span>
     </a>
 </li>

@@ -14,5 +14,6 @@ public interface UserAppService extends UserDetailsService {
     UserApp getUserByEmail(String email);
     void updateUser( UserApp newUser);
     UserApp deleteUser(Integer id);
+    List<UserApp> saveAll(List<UserApp> list);
 
 }

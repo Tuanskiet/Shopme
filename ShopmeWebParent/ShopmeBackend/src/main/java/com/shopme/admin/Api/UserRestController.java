@@ -1,4 +1,4 @@
-package com.shopme.admin.controllers;
+package com.shopme.admin.Api;
 
 import com.shopme.admin.services.UserAppService;
 import com.shopme.common.entity.UserApp;

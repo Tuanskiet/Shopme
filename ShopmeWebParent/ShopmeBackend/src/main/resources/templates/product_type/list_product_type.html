@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+                th:replace="_layout :: view(~{::#content})">
+<head th:replace="fragments :: main_header">
+</head>
+<body>
+<div id="content">
+    <div th:replace="fragments :: breadcrumb('List Type Product')"></div>
+    <!--start List Type Product-->
+    <div class="list_user px-4">
+        <div th:if="${listProductType.size() == 0}" class="alert alert-danger mt-3 " role="alert">Empty list!</div>
+        <div th:if="${success != null}" class="alert alert-success  mt-3" role="alert">[[${success}]]</div>
+        <div th:if="${error != null}" class="alert alert-danger  mt-3" role="alert">[[${error}]]</div>
+        <div class="d-flex justify-content-between  mt-3  ">
+            <a th:href="@{/product-type/add}" class="btn btn-create">Create New Type Product</a>
+            <div class="group_export bg-dark bg-opacity-10 border border-1 border-dark">
+                <a th:href="@{/product-type/export/csv}" class="btn btn-export">Export to csv</a>
+                <a th:href="@{/product-type/export/excel}" class="btn btn-export">Export to Excel</a>
+                <a th:href="@{/product-type/export/pdf}" class="btn ">Export to Pdf</a>
+            </div>
+        </div>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Slug</th>
+                <th scope="col">Category</th>
+                <th scope="col">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${listProductType}">
+                <td>[[${item.productTypeId}]]</td>
+                <td>[[${item.name}]]</td>
+                <td>[[${item.slug}]]</td>
+                <td>[[${item.category.name}]]</td>
+                <td>
+                    <a th:href="@{'/product-type/edit?id=' + ${item.productTypeId}}">Edit</a>
+                    <a th:href="@{'/product-type/delete?id=' + ${item.productTypeId}}">Delete</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <!--end List Type Product-->
+</div>
+<script>
+
+</script>
+</body>
+</html>

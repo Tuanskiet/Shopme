@@ -35,11 +35,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
-                .authorizeRequests().anyRequest().permitAll()
+                .authorizeRequests()
+                .antMatchers("/webjars/**","/css/**", "/js/**", "/images/**","/fontawesome/**","/webfonts/**").permitAll()
+                .antMatchers("/login").permitAll()
+//                .antMatchers("/_layout", "/fragments").permitAll()
+                .anyRequest().authenticated()
                 .and().formLogin().loginPage("/login")
                 .and().logout()
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/login?logout").deleteCookies("JSESSIONID", "remember-me")
                 .permitAll();
+    }
+
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
     }
 }

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{_layout :: view(~{::#content})}" >
+<!--<head th:replace="fragments :: main_header('Create new User')">-->
+<body>
+    <div id="content">
+        <div th:replace="fragments :: breadcrumb('Update Product Type')"></div>
+        <div class="container">
+            <form id="formUpdateCategory" th:action="@{/product-type/update}" method="post" th:object="${productTypeUpdate}">
+                <input type="hidden" th:field="*{productTypeId}" th:value="${productTypeUpdate.productTypeId}">
+                <div class="mb-3">
+                    <label class="form-label">Category name :</label>
+                    <input type="text" class="form-control"  th:field="*{name}" th:value="${productTypeUpdate.name}">
+                    <div th:if="${nameError != null}"  class="form-text text-danger">[[${nameError}]]</div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Slug : </label>
+                    <input type="text" class="form-control" th:field="*{slug}" th:value="${productTypeUpdate.slug}">
+                    <div th:if="${slugError != null}"  class="form-text text-danger">[[${slugError}]]</div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Category : </label>
+                    <select class="form-select" th:field="*{category}">
+                        <option th:each="item : ${categories}"
+                                th:value="${item.categoryId}"
+                                th:text="${item.name}">
+                        </option>
+                    </select>
+                </div>
+                <input type="submit" value="Submit" class="btn btn-primary">
+                <button type="reset" id="btnCancel" class="btn btn-danger">Cancel</button>
+            </form>
+        </div>
+
+    </div>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#btnCancel").on('click', function(){
+            window.location = "[[@{/category/all}]]"
+        });
+    });
+</script>
+</body>
+</html>

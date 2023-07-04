@@ -33,8 +33,8 @@
 </th:block>
 
 <!--item dashboard-->
-<li th:fragment="dashboard_item(title, icon)" class="list-group-action  ps-4 py-2 border-0">
-    <a href="#" class="icon_action w-100 text-decoration-none text-dark">
+<li th:fragment="dashboard_item(path, title, icon)" class="list-group-action  ps-4 py-2 border-0">
+    <a th:href="@{${path}}" class="icon_action w-100 text-decoration-none text-dark">
         <i th:class="${icon}"></i>
         <span  th:text="${title}"></span>
     </a>

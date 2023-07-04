@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+                th:replace="_layout :: view(~{::#content})">
+<head th:replace="fragments :: main_header">
+</head>
+<body>
+<div id="content">
+    <div th:replace="fragments :: breadcrumb('List Category')"></div>
+    <!--start List user-->
+    <div class="list_user px-4">
+        <div th:if="${categories.size() == 0}" class="alert alert-danger mt-3 " role="alert">Empty list!</div>
+        <div th:if="${success != null}" class="alert alert-success  mt-3" role="alert">[[${success}]]</div>
+        <div th:if="${error != null}" class="alert alert-danger  mt-3" role="alert">[[${error}]]</div>
+        <!--start List user -->
+        <div class="d-flex justify-content-between  mt-3  ">
+            <a th:href="@{/category/add}" class="btn btn-create">Create new category</a>
+            <div class="group_export bg-dark bg-opacity-10 border border-1 border-dark">
+                <a th:href="@{/category/export/csv}" class="btn btn-export">Export to csv</a>
+                <a th:href="@{/category/export/excel}" class="btn btn-export">Export to Excel</a>
+                <a th:href="@{/category/export/pdf}" class="btn ">Export to Pdf</a>
+            </div>
+        </div>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Slug</th>
+                <th scope="col">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${categories}">
+                <td>[[${item.categoryId}]]</td>
+                <td>[[${item.name}]]</td>
+                <td>[[${item.slug}]]</td>
+                <td>
+                    <a th:href="@{'/category/edit?id=' + ${item.categoryId}}">Edit</a>
+                    <a th:href="@{'/category/delete?id=' + ${item.categoryId}}">Delete</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <!--end List user-->
+</div>
+<script>
+
+</script>
+</body>
+</html>

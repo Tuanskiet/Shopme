@@ -72,6 +72,11 @@ public class UserAppServiceImpl implements UserAppService{
         return userDelete;
     }
 
+    @Override
+    public List<UserApp> saveAll(List<UserApp> list) {
+        return userRepository.saveAll(list);
+    }
+
     private void encodePassword(UserApp userApp) {
         String pEncode = passwordEncoder.encode(userApp.getPassword());
         userApp.setPassword(pEncode);

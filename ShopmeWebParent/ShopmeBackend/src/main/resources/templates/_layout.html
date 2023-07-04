@@ -16,13 +16,13 @@
             </div>
             <div class="dashboard">
                 <ul class="d-flex flex-column list-group ">
-                    <li th:replace="fragments :: dashboard_item('Users', 'far fa-user fs-4')"></li>
-                    <li th:replace="fragments :: dashboard_item('Categories', 'fad fa-hat-wizard fs-4')"></li>
-                    <li th:replace="fragments :: dashboard_item('Brands', 'fab fa-yelp fs-4')"></li>
-                    <li th:replace="fragments :: dashboard_item('Products', 'fab fa-product-hunt fs-4')"></li>
-                    <li th:replace="fragments :: dashboard_item('Customers', 'fas fa-user-tie fs-4')"></li>
-                    <li th:replace="fragments :: dashboard_item('Shipping', 'fas fa-dolly fs-4')"></li>
-                    <li th:replace="fragments :: dashboard_item('Sale reports', 'fas fa-tags fs-4')"></li>
+                    <li th:replace="fragments :: dashboard_item('/users', 'Users', 'far fa-user fs-4')"></li>
+                    <li th:replace="fragments :: dashboard_item('/category/all', 'Categories', 'fad fa-hat-wizard fs-4')"></li>
+                    <li th:replace="fragments :: dashboard_item('/product-type/all', 'Product type', 'fab fa-yelp fs-4')"></li>
+                    <li th:replace="fragments :: dashboard_item('/product/all', 'Products', 'fab fa-product-hunt fs-4')"></li>
+                    <li th:replace="fragments :: dashboard_item('/customer/all', 'Customers', 'fas fa-user-tie fs-4')"></li>
+                    <li th:replace="fragments :: dashboard_item('/users', 'Shipping', 'fas fa-dolly fs-4')"></li>
+                    <li th:replace="fragments :: dashboard_item('/users', 'Sale reports', 'fas fa-tags fs-4')"></li>
                 </ul>
             </div>
         </div>

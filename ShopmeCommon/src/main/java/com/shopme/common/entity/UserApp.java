@@ -39,7 +39,7 @@ public class UserApp {
     private String photos;
     private Boolean enabled;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_roles",
             joinColumns = @JoinColumn(name="user_id"),

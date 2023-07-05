@@ -36,6 +36,10 @@ public class ProductController {
         model.addAttribute("listProduct", listProduct);
         return "product/list_product";
     }
+    @GetMapping("add")
+    public String viewAddProductForm(){
+        return "/product/new_product";
+    }
 
     @PostMapping("/new")
     public ResponseEntity<ResponseObject> createNewProduct(@RequestBody Product product){

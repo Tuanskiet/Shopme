@@ -18,12 +18,17 @@ import java.io.Serializable;
 public class ProductImage  implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer product_image_id;
-    private String color;
+    @Column(name = "product_image_id")
+    private Integer productImageId;
     private String url;
 
     @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "product_id", referencedColumnName = "product_id")
     private Product product;
+
+    public ProductImage(String url, Product product) {
+        this.url = url;
+        this.product = product;
+    }
 }

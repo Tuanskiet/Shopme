@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="main_header(condition)" th:remove="${condition}" >
+  <meta charset="UTF-8">
+  <title>Tk Shop</title>
+  <!--    ==== CSS === -->
+  <!--    bootstrap -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+
+  <!--   custom css -->
+  <link rel="stylesheet" type="text/css" th:href="@{/dist/css/style.css}">
+
+  <!--    ==== JAVASCRIPT === -->
+  <!--    bootstrap 5-->
+  <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+  <!--    jquery -->
+  <script type="text/javascript" th:src="@{/webjars/jquery/dist/jquery.js}"></script>
+  <!--custom js-->
+  <script type="text/javascript" th:src="@{/dist/js/custom_animation.js}"></script>
+  <!--  <script type="text/javascript" th:src="@{/js/common.js}"></script>-->
+
+  <!-- include summernote css/js -->
+  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+</head>
+<body>
+<!-- start header -->
+<header  th:fragment="header" class="">
+  <div class="container-fluid nav-top bg-black bg-opacity-75 text-white">
+    <div class="container">
+      <div class="row py-3">
+        <div class="col-6">
+          <p class=" mb-0 text-uppercase ">Miễn phí giao hàng toàn quốc với đơn hàng trên 500.000 đ</p>
+        </div>
+
+        <div class="col-6 ">
+          <ul class="d-flex align-items-end justify-content-end mb-0">
+            <li class="list-group-item  d-inline me-4">
+              <a class=" text-decoration-none text-white" href="">
+                <i class="bi bi-bell-fill"></i>
+                Thông báo</a>
+            </li>
+            <li class="list-group-item d-inline me-4">
+              <a class="text-decoration-none text-white" href="">
+                <i class="bi bi-question-circle-fill"></i>
+                Hỗ trợ</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- end header -->
+<!-- start nav -->
+<nav th:fragment="nav" class="navbar navbar-expand-lg bg-body-tertiary ">
+  <div class="container">
+    <a class="navbar-brand fw-bold fs-4" th:href="@{/}">
+      TK<span class="text-danger ">SHOP</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active " aria-current="page" href="#">TRANG CHỦ</a>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            SẢN PHẨM
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item " href="#!products">Xem tất cả</a></li>
+            <li><a class="dropdown-item" href="#!products">Nam</a></li>
+            <li><a class="dropdown-item" href="#!products">Nữ</a></li>
+            <li><a class="dropdown-item" href="#!products">Phụ kiện</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " href="#footer">LIÊN HỆ</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link  " href="#footer">GÓP Ý</a>
+        </li>
+
+      </ul>
+      <form class="d-flex position-relative" role="search">
+        <i class="bi bi-search me-2 my-auto fw-bold fs-4"></i>
+        <input class=" rounded-0 bg-light border-0 fs-6 my-1 outline-focus-none" type="text" placeholder="Bạn cần gì . . ." >
+        <div class="line position-absolute bottom-0 w-100 bg-dark"></div>
+      </form>
+      <div class="d-flex align-items-center">
+        <div id="like-repo" class="d-flex justify-content-center align-items-center rounded-circle bg-black bg-opacity-10  mx-2">
+          <a href="#" class="">
+            <i class="bi bi-suit-heart-fill fs-5  fw-bolder  text-secondary"></i>
+          </a>
+        </div>
+
+        <div id="cart" class="position-relative d-flex justify-content-center align-items-center rounded-circle bg-black bg-opacity-10  ">
+          <a href="#"  data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
+            <i class="bi bi-cart fs-5  fw-bolder  text-dark"></i>
+          </a>
+
+          <div class="">
+            <span id="amount-cart" class="text-white  position-absolute top-0 start-75 translate-middle bg-danger px-2 rounded-circle"></span>
+          </div>
+        </div>
+
+        <div id="account" class="d-flex justify-content-center align-items-center rounded-circle bg-black bg-opacity-10  mx-2">
+          <a class="text-decoration-none text-white" href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasAccount" aria-controls="offcanvasAccount">
+            <i class="bi bi-person-circle fw-bolder fs-5 text-secondary"></i></a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</nav>
+<!-- end nav -->
+<!-- start footer -->
+<footer th:fragment="footer" id="footer" class="bg-black bg-opacity-75">
+  <div class="container ">
+    <footer class="py-5">
+      <div class="row  ">
+        <div class="col-6 col-md-2 mb-3 ">
+          <h5 class="text-white">SẢN PHẨM</h5>
+          <ul class="nav flex-column footer-group">
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-white text-opacity-75">Quần áo nam</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-white text-opacity-75">Quần áo nữ</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-white text-opacity-75">Phụ kiện</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-white text-opacity-75">Giày dép</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-white text-opacity-75">Túi xách</a></li>
+
+          </ul>
+        </div>
+
+        <div class="col-6 col-md-2 mb-3">
+          <h5 class="text-white">THÔNG TIN</h5>
+          <ul class="nav flex-column footer-group">
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-white text-opacity-75">Trạng thái đơn hàng</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-white text-opacity-75">Hình thức thanh toán</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-white text-opacity-75">Chính sách đổi trả</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-white text-opacity-75">Chính sách bảo hành</a></li>
+          </ul>
+        </div>
+
+        <div class="col-6 col-md-2 mb-3">
+          <h5 class="text-white ">HỖ TRỢ </h5>
+          <ul class="nav flex-column footer-group">
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-white text-opacity-75">Hướng dẫn mua hàng</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-white text-opacity-75">Chính sách bảo mật</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-white text-opacity-75">Vận chuyển</a></li>
+          </ul>
+        </div>
+
+        <div class="col-md-5 offset-md-1 mb-3">
+          <form>
+            <h5 class="text-white">THAM GIA BẢNG TIN CỦA CHÚNG TÔI</h5>
+            <p class="text-white  text-opacity-75">Chúng tôi sẽ liên hệ với bạn sớm nhất có thể.</p>
+            <div class="d-flex flex-column flex-sm-row w-100 gap-0">
+              <label for="newsletter1" class="visually-hidden">Email address</label>
+              <input id="newsletter1" type="text" class="form-control rounded-0" placeholder="Nhập email của bạn . . .">
+              <button class="btn btn-danger bg-opacity-75 rounded-0 " type="button">Subscribe</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
+        <p class="text-white">© 2023 Company, Inc. All rights reserved.</p>
+        <ul class="list-unstyled d-flex">
+          <li class="ms-3"><a class="link-body-emphasis" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"></use></svg></a></li>
+          <li class="ms-3"><a class="link-body-emphasis" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"></use></svg></a></li>
+          <li class="ms-3"><a class="link-body-emphasis" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"></use></svg></a></li>
+        </ul>
+      </div>
+    </footer>
+  </div>
+</footer>
+<!-- end footer -->
+
+<!-- modal login-->
+<div th:fragment="modal_login" class="modal fade" id="accountModal" aria-hidden="true" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-center w-100 fs-3">Đăng nhập</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body px-5 py-4 mt-2">
+        <form >
+          <div class="login-box">
+            <div class="user-box-group d-flex align-items-center mb-4">
+              <i class="bi bi-envelope-at me-2 fs-4 flex-shrink-0"></i>
+              <div class="user-box position-relative flex-grow-1">
+                <input id="email-login" type="email" class="fs-5 p-0 w-100" aria-describedby="emailHelp">
+                <label for="email-login"  class="form-label position-absolute start-0  mb-0">
+                  Email đăng nhập</label>
+              </div>
+            </div>
+
+            <div class="user-box-group d-flex align-items-center mb-4">
+              <i class="bi bi-person me-2 fs-4 flex-shrink-0"></i>
+              <div class="user-box position-relative flex-grow-1">
+                <input id="password-login" type="password" class="fs-5 p-0 w-100" aria-describedby="emailHelp">
+                <label for="password-login"  class="form-label position-absolute start-0  mb-0">
+                  Mật khẩu</label>
+              </div>
+            </div>
+            <div class="mb-3 form-check">
+              <input type="checkbox" class="form-check-input" id="exampleCheck1">
+              <label class="form-check-label" for="exampleCheck1">Ghi nhớ tài khoản</label>
+            </div>
+            <div class="d-flex justify-content-center">
+              <button type="submit" class="btn btn-outline-danger bg-opacity-25 fs-6 rounded-0 text-uppercase fw-bold w-100">Đăng nhập</button>
+            </div>
+          </div>
+        </form>
+
+        <div class="row mt-3 align-items-center">
+          <div class="col-5 line bg-black"></div>
+          <div class="col-2 text-center">Hoặc</div>
+          <div class="col-5 line bg-black"></div>
+        </div>
+
+        <div class="row justify-content-between mt-3">
+          <div class="col-6 ">
+            <div class="border border-1 border-dark  py-2 text-center d-flex align-items-center justify-content-center">
+              <img th:src="@{images/social_icons/facebook-icon.png}" class="social-icon  me-2" alt="">
+              <a class=" text-decoration-none fs-5" href="">
+                <span>Facebook</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="col-6 ">
+            <div class="border border-1 border-dark py-2 text-center d-flex align-items-center justify-content-center">
+              <img  th:src="@{images/social_icons/google-icon.png}" class="social-icon  me-2" alt="">
+              <a class=" text-decoration-none fs-5" href="">
+                <span>Google</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center mt-2">
+          <a href="#" class="text-dark" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">Chưa có tài khoản?</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- modal signup -->
+<div th:fragment="modal_sign_in" class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-center w-100 fs-3" id="exampleModalToggleLabel">Đăng kí</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body px-4 py-3">
+        <form class="row gx-4">
+          <div class="col-6">
+            <div class="user-box-group d-flex align-items-center mb-4">
+              <i class="bi bi-calendar3 me-2 fs-4 flex-shrink-0"></i>
+              <div class="user-box position-relative flex-grow-1">
+                <input id="date" type="text" class="fs-5 p-0 w-100" aria-describedby="emailHelp" >
+                <label for="date"  class="form-label position-absolute start-0  mb-0">
+                  Ngày sinh</label>
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="user-box-group d-flex align-items-center mb-4">
+              <i class="bi bi-telephone-forward me-2 fs-4 flex-shrink-0"></i>
+              <div class="user-box position-relative flex-grow-1">
+                <input id="phonenumber" type="text" class="fs-5 p-0 w-100" aria-describedby="emailHelp" >
+                <label for="phonenumber"  class="form-label position-absolute start-0  mb-0">
+                  Số điện thoại</label>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="user-box-group d-flex align-items-center mb-4">
+              <i class="bi bi-envelope-at me-2 fs-4 flex-shrink-0"></i>
+              <div class="user-box position-relative flex-grow-1">
+                <input id="email-signin" type="email" class="fs-5 p-0 w-100" aria-describedby="emailHelp">
+                <label for="email-signin"  class="form-label position-absolute start-0  mb-0">
+                  Email đăng nhập</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="user-box-group d-flex align-items-center mb-4">
+              <i class="bi bi-person me-2 fs-4 flex-shrink-0"></i>
+              <div class="user-box position-relative flex-grow-1">
+                <input id="password-signin" type="password" class="fs-5 p-0 w-100" aria-describedby="emailHelp">
+                <label for="password-signin"  class="form-label position-absolute start-0  mb-0">
+                  Mật khẩu</label>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="user-box-group d-flex align-items-center mb-4">
+              <i class="bi bi-person-vcard me-2 fs-4 flex-shrink-0"></i>
+              <div class="user-box position-relative flex-grow-1">
+                <input id="fullname" type="text" class="fs-5 p-0 w-100" aria-describedby="emailHelp">
+                <label for="fullname"  class="form-label position-absolute start-0  mb-0">
+                  Họ Tên</label>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="user-box-group d-flex align-items-center mb-4">
+              <i class="bi bi-pin-map me-2 fs-4 flex-shrink-0"></i>
+              <div class="user-box position-relative flex-grow-1">
+                <input id="address" type="text" class="fs-5 p-0 w-100" aria-describedby="emailHelp" >
+                <label for="address"  class="form-label position-absolute start-0  mb-0">
+                  Địa chỉ</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-3 ms-3 form-check">
+            <input type="checkbox" class="form-check-input" id="accept-signin">
+            <label class="form-check-label" for="accept-signin">Tôi chấp nhận điều khoản quyền riêng tư và bảo mật</label>
+          </div>
+
+          <div class="col-12">
+            <div class="d-flex justify-content-center">
+              <button type="submit" class="btn btn-outline-danger bg-opacity-25 fs-6 rounded-0 text-uppercase fw-bold w-100">Đăng Kí</button>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="row mt-3 mx-2 align-items-center">
+              <div class="col-5 line bg-black"></div>
+              <div class="col-2 text-center">Hoặc</div>
+              <div class="col-5 line bg-black"></div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="row justify-content-between mt-3">
+              <div class="col-6 ">
+                <div class="border border-1 border-dark  py-2 text-center d-flex align-items-center justify-content-center">
+                  <img src="assets/social icons/facebook-icon" class="social-icon  me-2" alt="">
+                  <a class=" text-decoration-none fs-5" href="">
+                    <span>Facebook</span>
+                  </a>
+                </div>
+              </div>
+              <div class="col-6 ">
+                <div class="border border-1 border-dark py-2 text-center d-flex align-items-center justify-content-center">
+                  <img src="assets/social icons/google-icon.png" class="social-icon  me-2" alt="">
+                  <a class=" text-decoration-none fs-5" href="">
+                    <span>Google</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer border-0">
+        <!-- <button class="btn btn-outline-danger bg-opacity-25" data-bs-target="#accountModal" data-bs-toggle="modal" data-bs-dismiss="modal">
+          Quay lại đăng nhập</button> -->
+        <a href="#" class="text-dark" data-bs-target="#accountModal" data-bs-toggle="modal" data-bs-dismiss="modal">
+          <i class="bi bi-arrow-left"></i>
+          Quay lại đăng nhập
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- offcanvas Account-->
+<div th:fragment="off_canvas_account" class="offcanvas offcanvas-end text-dark " tabindex="-1" id="offcanvasAccount" aria-labelledby="offcanvasAccountLabel">
+  <div class="offcanvas-header border-bottom border-2">
+    <div class="account-active d-flex align-items-center bg-black bg-opacity-10 ps-1 pe-3 rounded-pill">
+      <div class="me-2">
+        <img  th:src="@{images/user1.jpg}" class="img-fluid rounded-circle h-100 account-active-img" alt="">
+      </div>
+      <div class="">
+        <h5 class="d-block mb-0" id="offcanvasAccountLabel">Tuấn Kiệt</h5>
+        <span class="text-truncate">tuankiet@gmail.com</span>
+      </div>
+    </div>
+
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+
+  <div class="offcanvas-body pt-0 px-0">
+    <ul class="ps-0 ">
+      <li class="manager-item list-group-item py-3 px-4 mb-1 bg-danger bg-opacity-25 d-flex justify-content-between align-items-center">
+        <div class="">
+          <i class="bi bi-shop  fs-5 text-danger fw-bolder me-2"></i>
+          <a class="text-decoration-none fs-5 text-danger" href="#">Bắt đầu bán</a>
+        </div>
+
+        <div class="">
+          <span class="fs-6">Đăng kí miễn phí</span>
+          <i class="bi bi-chevron-right opacity-50"></i>
+        </div>
+      </li>
+      <li class="manager-item list-group-item border-top border-bottom border-1 py-3 px-4 d-flex justify-content-between align-items-center">
+        <div class="">
+          <i class="bi bi-award  fs-5 text-dark fw-bolder me-2"></i>
+          <a class="text-decoration-none fs-6 text-dark" href="#">KH thân thiết</a>
+        </div>
+
+        <div class="">
+          <span class="fs-6 opacity-75">Thành viên vàng</span>
+          <i class="bi bi-chevron-right"></i>
+        </div>
+      </li>
+      <li class="manager-item list-group-item border-bottom border-1 py-3 px-4 d-flex justify-content-between align-items-center">
+        <div class="">
+          <i class="bi-suit-heart  fs-5 text-dark fw-bolder me-2"></i>
+          <a class="text-decoration-none fs-6 text-dark" href="#">Đã thích</a>
+        </div>
+
+        <div class="">
+          <span class="fs-6 opacity-75">12 Likes</span>
+          <i class="bi bi-chevron-right"></i>
+        </div>
+      </li>
+      <li class="manager-item list-group-item border-bottom border-1 py-3 px-4 d-flex justify-content-between align-items-center">
+        <div class="">
+          <i class="bi-journal-text fs-5 text-dark fw-bolder me-2"></i>
+          <a class="text-decoration-none fs-6 text-dark" href="#">Đơn mua</a>
+        </div>
+
+        <div class="">
+          <span class="fs-6 opacity-75">Lịch sử mua hàng</span>
+          <i class="bi bi-chevron-right"></i>
+        </div>
+      </li>
+      <li class="manager-item list-group-item border-bottom border-1 py-3 px-4 d-flex justify-content-between align-items-center">
+        <div class="">
+          <i class="bi bi-bag-check fs-5 text-dark fw-bolder me-2"></i>
+          <a class="text-decoration-none fs-6  text-dark " href="#">
+                        <span class="fw-bold">
+                            TK<span class="text-danger ">SHOP</span>
+                        </span>
+            Tiếp Thị Liên Kết</a>
+        </div>
+
+        <div class="">
+          <span class="fs-6 opacity-75"></span>
+          <i class="bi bi-chevron-right"></i>
+        </div>
+      </li>
+      <li class="manager-item list-group-item border-bottom border-1 py-3 px-4 d-flex justify-content-between align-items-center">
+        <div class="">
+          <i class="bi bi-star  fs-5 text-dark fw-bolder me-2"></i>
+          <a class="text-decoration-none fs-6 text-dark" href="#">Đánh giá của tôi</a>
+        </div>
+
+        <div class="">
+          <span class="fs-6 opacity-75"></span>
+          <i class="bi bi-chevron-right"></i>
+        </div>
+      </li>
+      <li class="manager-item list-group-item border-bottom border-1 py-3 px-4 d-flex justify-content-between align-items-center">
+        <div class="">
+          <i class=" bi-question-circle  fs-5 text-dark fw-bolder me-2"></i>
+          <a class="text-decoration-none fs-6 text-dark" href="#">Trung tâm trợ giúp</a>
+        </div>
+
+        <div class="">
+          <span class="fs-6 opacity-75"></span>
+          <i class="bi bi-chevron-right"></i>
+        </div>
+      </li>
+      <li class="manager-item list-group-item border-bottom border-1 py-3 px-4 ">
+        <a id="sign-in" class="d-block text-decoration-none d-flex justify-content-between align-items-center" data-bs-toggle="modal" href="#accountModal">
+          <div class="">
+            <i class="bi bi-box-arrow-in-left fs-5 text-dark fw-bolder me-2"></i>
+            <span class="text-decoration-none fs-6 text-dark "  >Đăng nhập - Đăng kí</span>
+          </div>
+          <div class="">
+            <span class="fs-6 opacity-75"></span>
+            <i class="bi bi-chevron-right"></i>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- offcanvas cart-->
+<div th:fragment="off_canvas_cart"class="offcanvas offcanvas-end text-dark " tabindex="-1" id="offcanvasCart" aria-labelledby="offcanvasCartLabel">
+  <div class="offcanvas-header border-bottom border-2">
+    <h4>Giỏ hàng</h4>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+
+  <div class="offcanvas-body pt-0 px-0">
+    <ul class="ps-0 ">
+      <li class="manager-item list-group-item border-top border-bottom border-1 py-3 px-4 d-flex justify-content-between align-items-center">
+        <div  class="d-flex">
+          <div class="position-relative">
+            <img src="" class="img-fluid object-fit-cover" alt=""  width="75px">
+            <span class="text-white  position-absolute top-0 start-75 translate-middle bg-danger px-2 rounded-circle">1</span>
+          </div>
+          <div class="detail_info ms-3 d-flex flex-column">
+            <h6 class="text-truncate ">name </h6>
+            <div class="">
+              <span> Size :XL</span> | <span> Màu : Red</span>
+            </div>
+            <div> Đơn giá : <span class="text-danger">003</span></div>
+          </div>
+        </div>
+        <div>
+          <i class="bi bi-trash text-danger fw-bold fs-4"></i>
+        </div>
+      </li>
+
+
+
+      <li class="manager-item list-group-item border-top border-bottom border-1 py-3 px-4 d-flex justify-content-between align-items-center">
+        <div >
+          <h5 class="mb-0">Tổng thanh toán</h5>
+        </div>
+        <div class="">
+          <span class="text-danger fs-4">55</span>
+        </div>
+      </li>
+
+      <li class="manager-item list-group-item border-top border-bottom border-1 py-3 px-4 d-flex justify-content-between align-items-center">
+        <button class="btn btn-danger rounded-0 w-50"><a href="#!payment" class="text-decoration-none text-white">Thanh toán</a></button>
+        <button class="btn btn-outline-danger rounded-0 btn-cart"><a href="#!cart" class="text-decoration-none text-danger">Giỏ hảng</a></button>
+      </li>
+    </ul>
+
+  </div>
+</div>
+
+
+</body>
+</html>

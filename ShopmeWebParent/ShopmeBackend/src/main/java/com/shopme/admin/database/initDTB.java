@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 @Component
@@ -59,12 +60,12 @@ public class initDTB implements CommandLineRunner {
         productTypeRepository.save(productType2);
         productTypeRepository.save(productType3);
 
-        Product product1 = new Product(null, "Áo thun T01", new BigDecimal("200000"), null, null,  "Cotton", 200, 23, "ao-thun-t01", productType1, new ArrayList<>());
-        Product product2 = new Product(null, "Áo thun T01", new BigDecimal("200000"), null, null,  "Cotton", 200, 23, "ao-thun-t02", productType1, new ArrayList<>());
-        Product product3 = new Product(null, "Áo thun T01", new BigDecimal("200000"), null, null,  "Cotton", 200, 23, "ao-thun-t03", productType1, new ArrayList<>());
-        Product product4 = new Product(null, "Áo thun T01", new BigDecimal("200000"), null, null,  "Cotton", 200, 23, "ao-thun-t04", productType1, new ArrayList<>());
-        Product product5 = new Product(null, "Áo thun T01", new BigDecimal("200000"), null, null,  "Cotton", 200, 23, "ao-thun-t05", productType1, new ArrayList<>());
-        Product product6 = new Product(null, "Quan jean T92", new BigDecimal("200000"), null, null,  "Cotton", 200, 23, "quan-jean-t06", productType3, new ArrayList<>());
+        Product product1 = new Product(null, "Áo thun T01", new BigDecimal("200000"), null, null,  "Cotton", 200, 23, "ao-thun-t01", productType1, new HashSet<>());
+        Product product2 = new Product(null, "Áo thun T01", new BigDecimal("200000"), null, null,  "Cotton", 200, 23, "ao-thun-t02", productType1, new HashSet<>());
+        Product product3 = new Product(null, "Áo thun T01", new BigDecimal("200000"), null, null,  "Cotton", 200, 23, "ao-thun-t03", productType1, new HashSet<>());
+        Product product4 = new Product(null, "Áo thun T01", new BigDecimal("200000"), null, null,  "Cotton", 200, 23, "ao-thun-t04", productType1, new HashSet<>());
+        Product product5 = new Product(null, "Áo thun T01", new BigDecimal("200000"), null, null,  "Cotton", 200, 23, "ao-thun-t05", productType1, new HashSet<>());
+        Product product6 = new Product(null, "Quan jean T92", new BigDecimal("200000"), null, null,  "Cotton", 200, 23, "quan-jean-t06", productType3, new HashSet<>());
 
         productService.createNewProduct(product1);
         productService.createNewProduct(product2);

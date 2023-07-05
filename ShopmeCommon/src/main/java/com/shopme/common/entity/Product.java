@@ -10,7 +10,9 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -41,6 +43,13 @@ public class Product implements Serializable {
     private Timestamp dateRelease;
     private String slug;
 
+    @Column(length = 1024)
+    private String shortDescription;
+
+    @Column(length = 4096)
+    private String fullDescription;
+    private String mainImage;
+
     @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_type_id")
@@ -48,9 +57,9 @@ public class Product implements Serializable {
 
     @JsonManagedReference
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
-    private List<ProductImage> images;
+    private Set<ProductImage> images = new HashSet<>();
 
-    public Product(Integer productId, String name, BigDecimal price, List<String> colors, List<String> sizes, String material, Integer quantityLeft, Integer quantitySold, String slug, ProductType productType, List<ProductImage> images) {
+    public Product(Integer productId, String name, BigDecimal price, List<String> colors, List<String> sizes, String material, Integer quantityLeft, Integer quantitySold, String slug, ProductType productType, Set<ProductImage> images) {
         this.productId = productId;
         this.name = name;
         this.price = price;
@@ -62,5 +71,9 @@ public class Product implements Serializable {
         this.slug = slug;
         this.productType = productType;
         this.images = images;
+    }
+
+    public void addExtraImage(String url){
+        this.images.add(new ProductImage(url, this));
     }
 }

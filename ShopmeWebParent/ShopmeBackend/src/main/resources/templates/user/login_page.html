@@ -6,7 +6,7 @@
 <body>
       <div id="content">
           <div class="container">
-              <div th:if="${param.error}" class="alert alert-danger" th:text="${error}">ss</div>
+              <div th:if="${param.error}" class="alert alert-danger" th:text="${param.error}">ss</div>
               <h5 class="modal-title text-center w-100 fs-3" id="exampleModalToggleLabel">Đăng nhập</h5>
               <form th:action="@{/login}" method="post" >
                   <div class="login-box">

@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+   th:fragment="view(content)">
+<head th:replace="fragments :: main_header('none')">
+</head>
+<body>
+    <header th:replace="fragments :: header"></header>
+    <nav th:replace="fragments :: nav"></nav>
+    <div th:replace="${content}"></div>
+    <footer th:replace="fragments :: footer"></footer>
+
+    <div th:replace="fragments :: modal_login"></div>
+    <div th:replace="fragments :: modal_sign_in"></div>
+    <div th:replace="fragments :: off_canvas_account"></div>
+    <div th:replace="fragments :: off_canvas_cart"></div>
+</body>
+</html>

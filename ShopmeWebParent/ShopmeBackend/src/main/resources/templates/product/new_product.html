@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{_layout :: view(~{::#content})}" >
+<!--<head th:replace="fragments :: main_header('Create new User')">-->
+<body>
+    <div id="content">
+        <div th:replace="fragments :: breadcrumb('New Product')"></div>
+        <div class="container">
+            <form id="formNewCategory" th:action="@{/product-type/new}" method="post" th:object="${newProductType}">
+                <div th:if="${error != null}" class="alert alert-danger  mt-3" role="alert">[[${error}]]</div>
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#overview" type="button" role="tab"  aria-selected="true">Overview</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link"  data-bs-toggle="tab" data-bs-target="#description" type="button" role="tab"  aria-selected="false">Description</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link"  data-bs-toggle="tab" data-bs-target="#image" type="button" role="tab" aria-selected="false">Image</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="overview" role="tabpanel" tabindex="0">
+                            <div th:replace="product/product_overview :: content"></div>
+                        </div>
+                        <div class="tab-pane fade" id="description" role="tabpanel"  tabindex="0">
+                            <div th:replace="product/product_description :: content"></div>
+                        </div>
+                        <div class="tab-pane fade" id="image" role="tabpanel"  tabindex="0">
+                            <div th:replace="product/product_image :: content"></div>
+                        </div>
+                    </div>
+                <input type="submit" value="Submit" class="btn btn-primary">
+                <button type="reset" id="btnCancel" class="btn btn-danger">Cancel</button>
+            </form>
+        </div>
+
+    </div>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#btnCancel").on('click', function(){
+            window.location = "[[@{/product-type/all}]]"
+        });
+    });
+</script>
+</body>
+</html>

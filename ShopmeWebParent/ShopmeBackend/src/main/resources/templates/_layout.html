@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-                xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       th:fragment="view(content)">
-<head th:replace="fragments :: main_header">
+<head th:replace="fragments :: main_header('none')">
 </head>
 <body>
 <!--dashboard-->
@@ -56,7 +56,8 @@
                     <div class="img_user me-2">
                         <img th:src="@{/images/user1.jpg}" class="img-fluid rounded-circle" alt="avatar" width="40px">
                     </div>
-                    <span class="">Luc Tuan Kiet</span>
+<!--                        <span class="" sec:authentication="principal.fullName">Luc Tuan Kiet</span>-->
+                        <span class="" >Luc Tuan Kiet</span>
                 </div>
             </div>
             <!--view-->

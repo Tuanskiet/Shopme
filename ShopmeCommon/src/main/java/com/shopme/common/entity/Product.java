@@ -48,6 +48,8 @@ public class Product implements Serializable {
 
     @Column(length = 4096)
     private String fullDescription;
+
+    @Column(length = 4096)
     private String mainImage;
 
     @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})
@@ -73,7 +75,7 @@ public class Product implements Serializable {
         this.images = images;
     }
 
-    public void addExtraImage(String url){
-        this.images.add(new ProductImage(url, this));
+    public void addExtraImage(String name, String color){
+        this.images.add(new ProductImage(name, color, this));
     }
 }

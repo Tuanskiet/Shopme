@@ -8,8 +8,30 @@
   <div th:fragment="content" th:remove="tag">
     <div class="mb-3">
       <label class="form-label">Product name :</label>
-      <input type="text" class="form-control">
+      <input type="text" class="form-control" th:field="*{name}">
     </div>
+      <div class="mb-3">
+          <label class="form-label" >Price :</label>
+          <input type="text" class="form-control" th:field="*{price}">
+      </div>
+      <div class="mb-3">
+          <label class="form-label" >Main image :</label>
+          <input type="file" class="form-control" name="mainImageFB">
+      </div>
+      <div class="row">
+          <div class="col">
+              <label class="form-label" >Chất liệu :</label>
+              <input type="text" class="form-control" th:field="*{material}">
+          </div>
+          <div class="col">
+              <label class="form-label" >Loại sản phẩm :</label>
+              <select class="form-control" th:field="*{productType}">
+                  <option th:each="item : ${listProductType}"
+                  th:value="${item.productTypeId}"
+                  th:text="${item.name}">
+              </select>
+          </div>
+      </div>
   </div>
 </body>
 </html>

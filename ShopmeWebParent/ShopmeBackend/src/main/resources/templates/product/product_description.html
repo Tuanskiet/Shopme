@@ -7,11 +7,26 @@
 <body>
   <div th:fragment="content" th:remove="tag">
 
-      <div id="summernote"></div>
+      <textarea  id="summernoteSort" th:field="*{shortDescription}"></textarea>
+      <textarea  id="summernoteFull" th:field="*{fullDescription}"></textarea>
       <script>
       $(document).ready(function() {
-          $('#summernote').summernote({
-            placeholder: 'Hello stand alone ui',
+          $('#summernoteSort').summernote({
+            placeholder: 'Write some sort description here',
+            tabsize: 2,
+            height: 80,
+            toolbar: [
+              ['style', ['style']],
+              ['font', ['bold', 'underline', 'clear']],
+              ['color', ['color']],
+              ['para', ['ul', 'ol', 'paragraph']],
+              ['table', ['table']],
+              ['insert', ['link', 'picture', 'video']],
+              ['view', ['fullscreen', 'codeview', 'help']]
+            ]
+          });
+          $('#summernoteFull').summernote({
+            placeholder: 'Long description ...',
             tabsize: 2,
             height: 120,
             toolbar: [

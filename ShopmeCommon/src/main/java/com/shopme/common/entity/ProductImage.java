@@ -20,15 +20,17 @@ public class ProductImage  implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_image_id")
     private Integer productImageId;
-    private String url;
+    private String name;
+    private String color;
 
     @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "product_id", referencedColumnName = "product_id")
     private Product product;
 
-    public ProductImage(String url, Product product) {
-        this.url = url;
+    public ProductImage(String name, String color, Product product) {
+        this.name = name;
+        this.color = color;
         this.product = product;
     }
 }

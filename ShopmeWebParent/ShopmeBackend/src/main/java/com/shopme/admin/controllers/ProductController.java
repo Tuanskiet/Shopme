@@ -3,11 +3,14 @@ package com.shopme.admin.controllers;
 
 import com.shopme.admin.domain.response.PageProductResponse;
 import com.shopme.admin.domain.response.ResponseObject;
+import com.shopme.admin.services.FirebaseService;
 import com.shopme.admin.services.ProductImageService;
 import com.shopme.admin.services.ProductService;
+import com.shopme.admin.services.ProductTypeService;
 import com.shopme.admin.utils.SlugGenerator;
 import com.shopme.common.entity.Product;
 import com.shopme.common.entity.ProductImage;
+import com.shopme.common.entity.ProductType;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,8 +22,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.IOException;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping("product")
@@ -28,7 +36,11 @@ public class ProductController {
     @Autowired
     ProductService productService;
     @Autowired
+    ProductTypeService productTypeService;
+    @Autowired
     ProductImageService productImageService;
+    @Autowired
+    FirebaseService firebaseService;
     @GetMapping("/all")
     @Operation(summary="Get all product", description = "Get product in DB (limit 10P per page)")
     public String getAllProduct(Model model){
@@ -36,17 +48,38 @@ public class ProductController {
         model.addAttribute("listProduct", listProduct);
         return "product/list_product";
     }
-    @GetMapping("add")
-    public String viewAddProductForm(){
+    @GetMapping("/add")
+    public String viewAddProductForm(Model model){
+        model.addAttribute("newProduct", new Product());
+        model.addAttribute("listProductType", this.getListProductType());
         return "/product/new_product";
     }
 
+
     @PostMapping("/new")
-    public ResponseEntity<ResponseObject> createNewProduct(@RequestBody Product product){
+    public String createNewProduct(@ModelAttribute Product product,
+                                   @RequestParam("mainImageFB") MultipartFile multipartFileMainIM,
+                                   @RequestParam("subImage") MultipartFile multipartFileSubIM,
+                                   @RequestParam("colorBySubImage") String colorBySubImage,
+                                   RedirectAttributes redirectAttributes) throws IOException {
         product.setSlug(SlugGenerator.generateSlug(product.getName()));
+        if(!multipartFileMainIM.isEmpty()){
+            String folder = "products/" + product.getSlug() + "/" ;
+            String linkImg = this.saveMainProductImageToFireBase(multipartFileMainIM, folder);
+            product.setMainImage(linkImg);
+        }
+        if(!multipartFileSubIM.isEmpty()){
+            String folder = "products/" + product.getSlug() + "/" + colorBySubImage + "/" ;
+            String linkImg = this.saveMainProductImageToFireBase(multipartFileSubIM, folder);
+            product.addExtraImage(linkImg, colorBySubImage);
+        }
         productService.createNewProduct(product);
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(new ResponseObject("ok", "create new product successfully", product));
+        redirectAttributes.addFlashAttribute("success", "Create product success!");
+        return "redirect:/product/all";
+    }
+
+    private String saveMainProductImageToFireBase(MultipartFile multipartFile, String folder) throws IOException {
+        return firebaseService.uploadFile(multipartFile, folder);
     }
 
     @GetMapping("")
@@ -114,4 +147,8 @@ public class ProductController {
                 new ResponseObject("200", "Upload product image successfully", productI)
         );
     }
+    private List<ProductType> getListProductType() {
+        return productTypeService.getAll();
+    }
+
 }

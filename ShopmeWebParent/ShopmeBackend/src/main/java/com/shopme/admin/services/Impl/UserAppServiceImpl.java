@@ -8,11 +8,14 @@ import com.shopme.common.entity.UserApp;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 @Service
@@ -21,6 +24,8 @@ import java.util.List;
 public class UserAppServiceImpl implements UserAppService{
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+
+    public final int SIZE_PRODUCT_PER_PAGE = 1;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -44,6 +49,12 @@ public class UserAppServiceImpl implements UserAppService{
     @Override
     public List<UserApp> getAll() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public Page<UserApp> getUserByPage(int page) {
+        Pageable pageable = PageRequest.of(page -1, SIZE_PRODUCT_PER_PAGE);
+        return userRepository.findAll(pageable);
     }
 
     @Override
@@ -76,6 +87,7 @@ public class UserAppServiceImpl implements UserAppService{
     public List<UserApp> saveAll(List<UserApp> list) {
         return userRepository.saveAll(list);
     }
+
 
     private void encodePassword(UserApp userApp) {
         String pEncode = passwordEncoder.encode(userApp.getPassword());

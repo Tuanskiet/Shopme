@@ -5,22 +5,22 @@
 </head>
 <body>
 <div id="content">
-    <div th:replace="fragments :: breadcrumb('List User')"></div>
+    <div th:replace="fragments :: breadcrumb('Users')"></div>
     <!--start List user-->
     <div class="list_user px-4">
-        <div th:if="${listUser.size() == 0}" class="alert alert-danger mt-3 " role="alert">Empty list!</div>
+        <div th:if="${listUser == null}" class="alert alert-danger mt-3 " role="alert">Empty list!</div>
         <div th:if="${success != null}" class="alert alert-success  mt-3" role="alert">[[${success}]]</div>
         <!--start List user -->
         <div class="d-flex justify-content-between  mt-3  ">
-            <a th:href="@{/user/add}" class="btn btn-create">Create new user</a>
-            <div class="group_export bg-dark bg-opacity-10 border border-1 border-dark">
-                <a th:href="@{/users/export/csv}" class="btn btn-export">Export to csv</a>
-                <a th:href="@{/users/export/excel}" class="btn btn-export">Export to Excel</a>
-                <a th:href="@{/users/export/pdf}" class="btn ">Export to Pdf</a>
+            <a th:href="@{/user/add}" class=" btn-new text-decoration-none">Create new user</a>
+            <div class="group_export">
+                <a th:href="@{/users/export/csv}" class="btn btn-export text-white">Export to csv</a>
+                <a th:href="@{/users/export/excel}" class="btn btn-export  text-white">Export to Excel</a>
+                <a th:href="@{/users/export/pdf}" class="btn  text-white">Export to Pdf</a>
             </div>
         </div>
 
-        <table class="table">
+        <table class="table  tbl_user align-middle">
             <thead>
             <tr>
                 <th scope="col">Photo</th>
@@ -40,17 +40,49 @@
                 <td>[[${item.email}]]</td>
                 <td>[[${item.firstName}]]</td>
                 <td>[[${item.lastName}]]</td>
-                <td>[[${item.enabled}]]</td>
-                <td>[[${item.roles}]]</td>
                 <td>
-                    <a th:href="@{'/user/edit?id=' + ${item.userId}}">Edit</a>
-                    <a th:href="@{'/user/delete?id=' + ${item.userId}}">Delete</a>
+                    <label class="enable_switch">
+                        <input type="checkbox" th:checked="${item.enabled}">
+                        <span class="enable_slider"></span>
+                    </label>
+                </td>
+                <td>[[${item.roles}]]</td>
+                <td >
+                    <a th:href="@{'/user/edit?id=' + ${item.userId}}" class="btn-edit text-decoration-none">
+                        <i class="bi bi-pen"></i>
+                    </a>
+                    <a  th:href="@{'/user/delete?id=' + ${item.userId}}" class="btn-delete text-decoration-none">
+                        <i class="bi bi-trash3"></i>
+                    </a>
                 </td>
             </tr>
             </tbody>
         </table>
     </div>
     <!--end List user-->
+
+<!--    pagination-->
+    <div id="pagination" class="text-center">
+        <div>Total items : [[${totalItems}]] - Page [[${currentPage}]] of [[${totalPages}]]</div>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination_custom d-flex  justify-content-center mt-2">
+                <li class="">
+                    <a th:if="${currentPage > 1}" class="" th:href="@{'/users?currentPage='+ ${currentPage -1}}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li  th:each="i : ${#numbers.sequence(1, totalPages )}" >
+                    <a th:href="@{'/users?currentPage='+ ${i} }" th:class="${ i == currentPage ? 'active' : ''}" >[[${i}]]</a>
+                </li>
+                <li class="">
+                    <a th:if="${currentPage < totalPages}" class="" th:href="@{'/users?currentPage='+ ${currentPage +1}}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <!--  end  pagination-->
 </div>
 <script>
 

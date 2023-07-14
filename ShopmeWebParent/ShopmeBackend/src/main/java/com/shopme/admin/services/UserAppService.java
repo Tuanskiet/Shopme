@@ -1,6 +1,7 @@
 package com.shopme.admin.services;
 
 import com.shopme.common.entity.UserApp;
+import org.springframework.data.domain.Page;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 
@@ -16,4 +17,5 @@ public interface UserAppService extends UserDetailsService {
     UserApp deleteUser(Integer id);
     List<UserApp> saveAll(List<UserApp> list);
 
+    Page<UserApp> getUserByPage(int page);
 }

@@ -14,7 +14,7 @@
     <link rel="stylesheet" type="text/css" th:href="@{/plugins/fontawesome/all.css}">
     <!--   custom css -->
     <link rel="stylesheet" type="text/css" th:href="@{/dist/css/style_admin.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/dist//css/style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/dist//css/style_admin.css}">
 
     <!--    ==== JAVASCRIPT === -->
     <!--    bootstrap 5-->
@@ -32,12 +32,12 @@
 <body>
 <!-- breadcrumb-->
 <th:block th:fragment="breadcrumb(path)">
-    <div class="breadcrumb-shop bg-dark bg-opacity-25 py-2">
+    <div class="breadcrumb-shop  py-2">
         <div class="container ">
             <nav aria-label="breadcrumb" style="--bs-breadcrumb-divider: '/';">
                 <ol class="breadcrumb mb-0">
-                    <li class="breadcrumb-item"><a class="text-dark text-decoration-none" href="#">Trang chủ</a></li>
-                    <li class="breadcrumb-item active"><a class="text-dark text-decoration-none" href="#" th:text="${path}"></a></li>
+                    <li class="breadcrumb-item"><a class="text-white text-decoration-none" href="#">Home</a></li>
+                    <li class="breadcrumb-item active"><a class="text-white text-decoration-none" href="#" th:text="${path}"></a></li>
                 </ol>
             </nav>
         </div>
@@ -45,16 +45,16 @@
 </th:block>
 
 <!--item dashboard-->
-<li th:fragment="dashboard_item(path, title, icon)" class="list-group-action  ps-4 py-2 border-0">
-    <a th:href="@{${path}}" class="icon_action w-100 text-decoration-none text-dark">
+<a  th:fragment="dashboard_item(path, title, icon)" th:href="@{${path}}" class="dashboard-item f  d-flex align-items-center text-decoration-none">
+    <div class="icon d-flex justify-content-center align-items-center">
         <i th:class="${icon}"></i>
-        <span  th:text="${title}"></span>
-    </a>
-</li>
+    </div>
+    <span class="name ps-3"  th:text="${title}"></span>
+</a>
 <!--end nav -->
-<div th:fragment="footer">
+<footer th:fragment="footer">
 
 
-</div>
+</footer>
 </body>
 </html>

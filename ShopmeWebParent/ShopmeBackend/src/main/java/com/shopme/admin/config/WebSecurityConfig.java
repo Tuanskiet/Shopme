@@ -1,5 +1,6 @@
 package com.shopme.admin.config;
 
+import com.shopme.admin.handle.CustomAuthenticationSuccessHandler;
 import com.shopme.admin.services.Impl.UserAppServiceImpl;
 import com.shopme.admin.services.UserAppService;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 
 @Configuration
@@ -26,6 +28,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserAppService userAppService;
     private final PasswordEncoder passwordEncoder;
+    private final CustomAuthenticationSuccessHandler authenticationSuccessHandler;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -40,6 +43,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login").permitAll()
                 .anyRequest().authenticated()
                 .and().formLogin().loginPage("/login")
+                .successHandler(authenticationSuccessHandler)
                 .and().logout()
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/login?logout").deleteCookies("JSESSIONID", "remember-me")

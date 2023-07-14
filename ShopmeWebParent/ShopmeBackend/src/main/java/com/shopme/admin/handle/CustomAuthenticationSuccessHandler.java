@@ -12,6 +12,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -21,14 +22,17 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+@Component
 @RequiredArgsConstructor
 public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
-    private final RefreshTokenService refreshTokenService;
+//    private final RefreshTokenService refreshTokenService;
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-//        this.redirectAfterLogin(request,response,authentication);
-        this.createToken(request,response,authentication);
+        RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
+        redirectStrategy.sendRedirect(request, response, "/users");
+ //        this.redirectAfterLogin(request,response,authentication);
+//        this.createToken(request,response,authentication);
     }
     public void redirectAfterLogin(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException{
         RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
@@ -44,6 +48,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
                 break;
             }
         }
+
 
         if (hasUserRole) {
             redirectStrategy.sendRedirect(request, response, "/success");

@@ -9,6 +9,7 @@ import com.shopme.admin.utils.export.pdf.UserPdfExporter;
 import com.shopme.common.entity.RoleApp;
 import com.shopme.common.entity.UserApp;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,9 +30,21 @@ import java.util.List;
 public class UserController {
     private final UserAppService userAppService;
     private final RoleRepository roleRepository;
-    @GetMapping({"/","/users"})
-    public String viewHomePage(Model model){
-        model.addAttribute("listUser", this.getAllUser());
+
+    @GetMapping("/users")
+    public String getUserWithSortAndPagination(
+            @RequestParam(name="currentPage",  defaultValue = "1",  required = false) Integer currentPage,
+            @RequestParam(name="sortBy",defaultValue = "id", required = false) String sortBy,
+            @RequestParam(name="order", defaultValue = "asc",   required = false) String orderBy,
+            Model model
+    ){
+        Page<UserApp> page =  userAppService.getUserByPage(currentPage);
+
+        List<UserApp> listUser = page.getContent();
+        model.addAttribute("totalPages", page.getTotalPages());
+        model.addAttribute("totalItems", page.getTotalElements());
+        model.addAttribute("listUser", listUser);
+        model.addAttribute("currentPage", currentPage);
         return "index";
     }
 
@@ -120,6 +133,8 @@ public class UserController {
         List<UserApp> list = this.getAllUser();
         exporter.export(list, response);
     }
+
+
 
 
 

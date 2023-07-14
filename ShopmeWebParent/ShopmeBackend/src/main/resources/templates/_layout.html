@@ -5,67 +5,100 @@
 <head th:replace="fragments :: main_header('none')">
 </head>
 <body>
-<!--dashboard-->
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-2 p-0 border-end border-1 border-gray">
-            <div class="name_brand  h-70 d-flex justify-content-center align-items-center border-bottom border-1 border-gray">
-                <a class="navbar-brand fw-bold fs-4" th:href="@{/}">
-                    TK<span class="text-danger ">SHOP</span>
-                </a>
-            </div>
-            <div class="dashboard">
-                <ul class="d-flex flex-column list-group ">
-                    <li th:replace="fragments :: dashboard_item('/users', 'Users', 'far fa-user fs-4')"></li>
-                    <li th:replace="fragments :: dashboard_item('/category/all', 'Categories', 'fad fa-hat-wizard fs-4')"></li>
-                    <li th:replace="fragments :: dashboard_item('/product-type/all', 'Product type', 'fab fa-yelp fs-4')"></li>
-                    <li th:replace="fragments :: dashboard_item('/product/all', 'Products', 'fab fa-product-hunt fs-4')"></li>
-                    <li th:replace="fragments :: dashboard_item('/customer/all', 'Customers', 'fas fa-user-tie fs-4')"></li>
-                    <li th:replace="fragments :: dashboard_item('/users', 'Shipping', 'fas fa-dolly fs-4')"></li>
-                    <li th:replace="fragments :: dashboard_item('/users', 'Sale reports', 'fas fa-tags fs-4')"></li>
-                </ul>
+    <div class="container-fluid h-100 px-0">
+        <div id="nav_main" class="mb-1 ">
+            <div class="row justify-content-between">
+                <div class="col-2 d-flex align-items-center px-0">
+                    <div class="hambuger ms-3">
+                        <i class="bi bi-list fs-3"></i>
+                    </div>
+                    <a class="main_logo d-flex align-items-center text-decoration-none fw-bold fs-4 ms-3" th:href="@{/}">
+                        TK<span class="text-danger ">SHOP</span>
+                    </a>
+                </div>
+
+                <div class="col-6 d-flex align-items-center">
+                    <form class="search_form w-100 d-flex align-items-center justify-content-between  ">
+                        <i class="bi bi-search"></i>
+                        <input type="text" name="" id=""  placeholder="Type here ">
+                        <div class="voice_icon d-flex justify-content-center align-items-center ms-2 pointer ">
+                            <i class="bi bi-mic"></i>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-2  info_user d-flex align-items-center justify-content-end ">
+                    <i class="bi bi-clock-history fs-5 me-3 pointer"></i>
+                    <div class="noti position-relative pointer">
+                        <i class="bi bi-bell fs-5  me-3 "></i>
+                        <div class="noti_number"></div>
+                    </div>
+                    <div class="pointer">
+                        <img th:src="@{/images/user1.jpg}" alt="" width="40px" class="rounded-circle dropdown-toggle"  data-bs-toggle="dropdown">
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-account">
+                            <li>
+                                <button class="dropdown-item" type="button">
+                                    <i class="bi bi-pen me-2"></i>
+                                    Manager profile
+                                </button>
+                            </li>
+                            <li>
+                                <button class="dropdown-item" type="button">
+                                    <i class="bi bi-question-circle me-2"></i>
+                                    Help center
+                                </button>
+                            </li>
+                            <li>
+                                <button class="dropdown-item" type="button">
+                                    <i class="bi bi-arrow-clockwise me-2"></i>
+                                    Change account
+                                </button>
+                            </li>
+                            <li>
+                                <button class="dropdown-item" type="button">
+                                    <i class="bi bi-box-arrow-left me-2"></i>
+                                    Sign out
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                    <label class="ui-switch ms-3">
+                        <input type="checkbox">
+                        <div class="slider">
+                            <div class="circle"></div>
+                        </div>
+                    </label>
+                </div>
             </div>
         </div>
-        <div class="col-10 p-0">
-            <div class="row m-0 h-70 justify-content-between border-bottom border-1 border-gray">
-                <div class="col-4 d-flex align-items-center">
-                    <a href="" class="text-dark">
-                        <i class="bi bi-list fs-2 me-3"></i>
-                    </a>
-                    <a href="" class="text-dark">
-                        <i class="bi bi-search fs-4"></i>
-                    </a>
+        <div  class="container-fluid px-0">
+            <div class="row h-100 mx-0">
+                <div id="dashboard" class="col-2 ">
+
+                        <a th:replace="fragments :: dashboard_item('/users', 'Users', 'far fa-user fs-4')"></a>
+                        <a th:replace="fragments :: dashboard_item('/category/all', 'Categories', 'fad fa-hat-wizard fs-4')"></a>
+                        <a th:replace="fragments :: dashboard_item('/product-type/all', 'Product type', 'fab fa-yelp fs-4')"></a>
+                        <a th:replace="fragments :: dashboard_item('/product/all', 'Products', 'fab fa-product-hunt fs-4')"></a>
+                        <a th:replace="fragments :: dashboard_item('/customer/all', 'Customers', 'fas fa-user-tie fs-4')"></a>
+                        <a th:replace="fragments :: dashboard_item('/shipping', 'Shipping', 'fas fa-dolly fs-4')"></a>
+                        <a th:replace="fragments :: dashboard_item('/reports', 'Sale reports', 'fas fa-tags fs-4')"></a>
+
                 </div>
-                <div class="col-4 d-flex align-items-center justify-content-end">
-                    <div id="chat_msg" class="position-relative d-flex justify-content-center align-items-center me-3">
-                        <a href="" class="text-dark">
-                            <i class="bi bi-chat-dots fs-4"></i>
-                        </a>
-                        <div class="">
-                            <span class="text-white position-absolute top-0 start-75 translate-middle bg-danger sz-25 d-flex justify-content-center align-items-center rounded-circle">22</span>
-                        </div>
-                    </div>
-                    <div id="notification" class="position-relative d-flex justify-content-center align-items-center me-3">
-                        <a href="" class="text-dark">
-                            <i class="bi bi-bell fs-4"></i>
-                        </a>
-                        <div class="">
-                            <span class="text-white position-absolute top-0 start-75 translate-middle bg-danger sz-25  d-flex  justify-content-center align-items-center rounded-circle">7</span>
-                        </div>
-                    </div>
-                    <div class="img_user me-2">
-                        <img th:src="@{/images/user1.jpg}" class="img-fluid rounded-circle" alt="avatar" width="40px">
-                    </div>
-<!--                        <span class="" sec:authentication="principal.fullName">Luc Tuan Kiet</span>-->
-                        <span class="" >Luc Tuan Kiet</span>
-                </div>
+                <div th:include="${content}" id="contents" class=" col-10 "></div>
             </div>
-            <!--view-->
-            <th:block th:replace="${content}"></th:block>
         </div>
     </div>
-</div>
 
-<nav th:replace="fragments :: footer"></nav>
+<footer th:replace="fragments :: footer"></footer>
+
+    <script th:inline="javascript">
+        $(document).ready(function(){
+             var currentLocation = window.location.pathname;
+             $('#dashboard a').each( function(i){
+                if( this.href.includes(currentLocation)){
+                    $(this).addClass('active');
+                }
+            });
+        });
+    </script>
 </body>
 </html>

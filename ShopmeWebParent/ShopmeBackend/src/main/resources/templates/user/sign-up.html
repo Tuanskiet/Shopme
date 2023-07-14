@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head th:replace="fragments :: main_header('none')">
+</head>
+<body>
+
+<div id="main_content" class="container-fluid">
+  <div class="container-fluid wrap-form">
+    <form class="form_register form-common">
+      <p class="title_form mb-1">Register </p>
+      <div class="row mb-2">
+        <div class="col">
+          <label class="form-title label-custom">Firstname : </label>
+          <input required placeholder="" type="text" class="form-control">
+        </div>
+        <div class="col">
+          <label class="form-title label-custom">Lastname : </label>
+          <input required placeholder="" type="text" class="form-control">
+        </div>
+      </div>
+
+      <div class="mb-2">
+        <label class="form-title label-custom">Email : </label>
+        <input required placeholder="" type="text" class="form-control">
+      </div>
+      <div class="mb-2">
+        <label class="form-title label-custom">Password : </label>
+        <input required placeholder="" type="text" class="form-control">
+      </div>
+      <div class="mb-2">
+        <label class="form-title label-custom">Confirm password : </label>
+        <input required placeholder="" type="text" class="form-control">
+        <div class="error-message">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</div>
+      </div>
+      <button class="btn-custom ">Submit</button>
+      <p class="signin text-center">Already have an acount ? <a class="link-custom" href="#">Sign in</a> </p>
+    </form>
+  </div>
+
+</div>
+
+</body>
+</html>
